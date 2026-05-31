@@ -24,8 +24,6 @@ const isLocalDevOrigin = (origin) => {
 };
 
 
-import cors from "cors";
-
 app.use(
   cors({
     origin: [
