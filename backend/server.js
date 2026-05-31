@@ -23,16 +23,15 @@ const isLocalDevOrigin = (origin) => {
   return /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
 };
 
+
 app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.has(origin) || isLocalDevOrigin(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error(`CORS not allowed for origin: ${origin}`));
-    }
-  },
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
 }));
+
+app.options('*', cors());
+
 app.use(express.json());
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
