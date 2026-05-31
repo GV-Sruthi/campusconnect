@@ -23,7 +23,7 @@ export function Register() {
     setError('');
     setLoading(true);
     try {
-      const res = await api.post('/api/auth/register', { name, email, password, rollNumber, branch, year, semester, section });
+      const res = await api.post('/auth/register', { name, email, password, rollNumber, branch, year, semester, section });
       if (!res.data?.success) throw new Error(res.data?.message || 'Register failed');
       login({ token: res.data.token, user: res.data.user });
       navigate('/', { replace: true });
